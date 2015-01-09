@@ -1,5 +1,4 @@
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-<div class="container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
       <i class="fa fa-bars"></i>
@@ -9,8 +8,7 @@
   <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
     <ul class="nav navbar-nav">
       <li class="hidden"><a href="#page-top"></a></li>
-      <li><%= link_to "Login", login_path %></li>
+      <li><%= render partial: 'partials/login' %></li>
     </ul>
   </div>
-</div>
 </nav>

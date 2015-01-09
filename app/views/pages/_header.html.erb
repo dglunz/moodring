@@ -6,8 +6,11 @@
         <h1 class="brand-heading">Mood<br>Ring</h1>
         <div class="row">
           <a href="#" class="btn btn-circle page-scroll">
-            <i class="fa fa-angle-double-down"></i>
+            <!--<i class="fa fa-circle-o-notch fa-spin"></i>-->
           </a>
+          <%= form_for @repo do |f| %>
+            <p>github.com/<%= f.text_field :owner, placeholder: "dglunz" %>/<%= f.text_field :repo, placeholder: "moodring" %></p>
+          <% end %>
         </div>
       </div>
     </div>

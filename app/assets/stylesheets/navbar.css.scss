@@ -1,3 +1,11 @@
+.navbar-custom .nav li a {
+  padding-right: 30px;
+}
+
+.navbar-brand {
+  line-height: inherit;
+}
+
 .navbar-custom {
   margin-bottom: 0;
   border-bottom: 1px solid rgba(255,255,255,.3);
@@ -59,5 +67,9 @@
   .navbar-custom.top-nav-collapse {
     border-bottom: 1px solid rgba(255,255,255,.3);
   }
+}
+
+.navbar-custom li a i {
+  font-size: 2.5em;
 }
 
