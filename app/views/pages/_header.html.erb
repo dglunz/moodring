@@ -7,12 +7,14 @@
         <div class="row">
           <%= form_for @repo, html: { id: "repoForm" }, remote: true do |f| %>
             <p>github.com/
-              <%= f.text_field :owner, class: "github-repo", placeholder: "dglunz" %>/
-              <%= f.text_field :name, class: "github-repo", placeholder: "moodring" %>
+            <%= f.text_field :owner, class: "github-repo", placeholder: "dglunz" %>/
+            <%= f.text_field :name, class: "github-repo", placeholder: "moodring" %>
             </p>
-          </div>
-          <%= f.submit "", class: "btn btn-circle" %>
-        <% end %>
+            <div id="circle">
+              <%= f.submit "", class: "btn btn-circle" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
