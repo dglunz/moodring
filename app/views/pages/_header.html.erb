@@ -5,14 +5,12 @@
       <div class="col-md-8 col-md-offset-2">
         <h1 class="brand-heading">Mood<br>Ring</h1>
         <div class="row">
-          <%= form_for @repo, html: { id: "repoForm" }, remote: true do |f| %>
+          <%= form_for @repo, html: {id: 'repoForm'}, remote: true do |f| %>
             <p>github.com/
             <%= f.text_field :owner, class: "github-repo", placeholder: "dglunz" %>/
             <%= f.text_field :name, class: "github-repo", placeholder: "moodring" %>
             </p>
-            <div id="circle">
-              <%= f.submit "", class: "btn btn-circle" %>
-            </div>
+            <div id="circle"></div>
           <% end %>
         </div>
       </div>
