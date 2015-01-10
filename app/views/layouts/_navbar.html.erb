@@ -3,7 +3,10 @@
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
       <i class="fa fa-bars"></i>
     </button>
-    <a class="navbar-brand page-scroll" href="#page-top"><span class="light">Mood</span> Ring</a>
+    <% if current_page? root_path %>
+    <% else %>
+      <a class="navbar-brand page-scroll" href="#page-top"><span class="light">Mood</span> Ring</a>
+    <% end %>
   </div>
   <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
     <ul class="nav navbar-nav">
