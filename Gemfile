@@ -14,6 +14,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'unicorn'
 gem 'font-awesome-rails'
 gem 'd3-rails'
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'pry-byebug'
