@@ -15,6 +15,8 @@ gem 'unicorn'
 gem 'font-awesome-rails'
 gem 'd3-rails'
 gem 'omniauth-github'
+gem 'faraday'
+gem 'figaro'
 
 group :development, :test do
   gem 'pry-byebug'
