@@ -1,13 +1,21 @@
 class Repo < ActiveRecord::Base
-  def get_commits(repo)
-    commits = Faraday.get "https://api.github.com/repos/#{repo[:owner]}/#{repo[:name]}/commits" do |request|
+  def commits
+    @commits ||= Faraday.get "https://api.github.com/repos/#{owner}/#{name}/commits" do |request|
       request.params['client_id'] = ENV['GITHUB_KEY']
       request.params['client_secret'] = ENV['GITHUB_SECRET']
     end.body
-    JSON.parse commits, { symbolize_names: true }
+    JSON.parse @commits, { symbolize_names: true }
   end
 
-  def get_commit_messages(repo)
-    get_commits(repo).map{ |commit| commit[:commit][:message] }
+  def messages
+    commits.map{ |commit| commit[:commit][:message] }
+  end
+
+  def sentiment
+    @sentiment ||= messages.map { |commit| Sentimentalizer.analyze(commit).overall_probability }
+  end
+
+  def mood
+    sentiment.inject(:+) / messages.count
   end
 end
