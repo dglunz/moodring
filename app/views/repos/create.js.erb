@@ -1,5 +1,4 @@
 $(function() {
-  console.log("BOOM");
   d3.selectAll('svg').remove();
   var width = 480,
       height = 250,
@@ -30,9 +29,12 @@ $(function() {
       .attr("text-anchor", "middle")
       .attr("dy", ".35em");
 
+  var o = d3.scale.linear([0,1])
+      .range(['blue','yellow']);
+
   svg.append("path").transition().duration(1000).tween("created", function() {
     var i = d3.interpolate(0,1);
-    var c = d3.interpolateRgb('white', 'black');
+    var c = d3.interpolateRgb('white', o(<%= @mood %>));
         return function(t) {
           created = i(t);
           color = c(t);
