@@ -17,7 +17,7 @@ gem 'd3-rails'
 gem 'omniauth-github'
 gem 'faraday'
 gem 'figaro'
-gem 'sentimentalizer'
+gem 'sentimentalizer', github: 'malavbhavsar/sentimentalizer'
 
 group :development, :test do
   gem 'pry-byebug'

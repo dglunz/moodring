@@ -1,7 +1,6 @@
 class ReposController < ApplicationController
   def create
     @repo = Repo.new(repo_params)
-    binding.pry
     if @repo.save
       redirect_to root_path
     else
