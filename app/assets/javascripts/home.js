@@ -2,15 +2,10 @@ $(function() {
   $("body").on("input propertychange", ".github-repo", function(e) {
     var size = $(this).val().length;
     $(this).css('width', 65 + (size * 6));
-    console.log(size);
   });
 });
 
 $(function() {
-  $('#circle').click(function() {
-    $('form#repoForm').trigger('submit.rails');
-  });
-
   $("body").on("input propertychange", ".floating-label", function(e) {
     $(this).toggleClass("floating-label-with-value", !! $(e.target).val());
   }).on("focus", ".floating-label", function() {

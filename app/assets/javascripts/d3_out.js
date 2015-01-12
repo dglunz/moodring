@@ -15,6 +15,7 @@ var arc = d3.svg.arc()
 var svg = d3.select("#circle").append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("id", "submit-repo")
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
 
@@ -42,7 +43,7 @@ var text = meter.append("text")
     .attr("text-anchor", "middle")
     .attr("dy", ".35em");
 
-$("#circle").click(function() {
+$("svg#submit-repo").click(function() {
   d3.json("https://api.github.com/repos/mbostock/d3/git/blobs/2e0e3b6305fa10c1a89d1dfd6478b1fe7bc19c1e?" + Math.random())
   .on("progress", function() {
     var i = d3.interpolate(progress, d3.event.loaded / total);
@@ -57,5 +58,6 @@ $("#circle").click(function() {
   .get(function(error, data) {
     meter.transition().delay(1250).attr("transform", "scale(0)");
   });
+    $('form#repoForm').trigger('submit.rails');
   });
 });

@@ -1,10 +1,15 @@
 class ReposController < ApplicationController
   def create
     @repo = Repo.new(repo_params)
-    if @repo.save
-      redirect_to root_path
-    else
-      redirect_to root_path
+    respond_to do |format|
+      if @repo.save
+        @mood = @repo.mood
+        format.html { redirect_to root_path }
+        format.js   {}
+        format.json { render json: @mood, status: :created }
+      else
+        redirect_to root_path
+      end
     end
   end
 
