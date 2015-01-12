@@ -1,17 +1,15 @@
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-      <i class="fa fa-bars"></i>
-    </button>
-    <% if current_page? root_path %>
-    <% else %>
-      <a class="navbar-brand page-scroll" href="#page-top"><span class="light">Mood</span> Ring</a>
-    <% end %>
-  </div>
-  <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-    <ul class="nav navbar-nav">
-      <li class="hidden"><a href="#page-top"></a></li>
-      <li><a href="/auth/github"><i class="fa fa-github"></i></a></li>
-    </ul>
-  </div>
+<div class="navbar-header">
+  <% if current_page? root_path %>
+  <% else %>
+    <a class="navbar-brand" href="#page-top"><span class="light">Mood</span> Ring</a>
+  <% end %>
+</div>
+<ul class="nav navbar-nav navbar-right text-right">
+  <% if current_user %>
+    <li><%= link_to "Logout", logout_path, method: 'delete' %></li>
+  <% else %>
+    <li><a href="/auth/github"><i class="fa fa-github"></i></a></li>
+  <% end %>
+</ul>
 </nav>
