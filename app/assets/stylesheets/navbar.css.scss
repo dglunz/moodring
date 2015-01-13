@@ -1,6 +1,20 @@
 .avatar {
+  display: inherit;
   width: 48px;
   heigh: 48px;
+}
+
+.navbar-nav .open .dropdown-menu{
+  right: 0;
+  left: auto;
+  position: absolute;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
 .navbar-brand {
