@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
       user.uid      = auth['uid']
       user.name     = auth['info']['name']
       user.email    = auth['info']['email']
+      user.avatar   = auth['info']['image']
     end
   end
 end
