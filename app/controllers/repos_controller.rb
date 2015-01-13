@@ -4,7 +4,7 @@ class ReposController < ApplicationController
     respond_to do |format|
       if @repo.save
         @mood = @repo.mood
-        format.html { redirect_to root_path }
+        format.html { redirect :back }
         format.js   {}
         format.json { render json: @mood, status: :created }
       else
