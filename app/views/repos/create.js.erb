@@ -1,12 +1,13 @@
 $(function() {
+  console.log("bam");
+  $('#repoForm p').hide();
+
+  console.log("BOOM");
   d3.selectAll('svg').remove();
   var width = 480,
       height = 250,
       twoPi = 2 * Math.PI,
-      progress = 0,
-      start = 0,
       created = 0,
-      total = 1308573,
       formatPercent = d3.format(".0%");
 
   var arc = d3.svg.arc()
@@ -43,4 +44,6 @@ $(function() {
           text.text(formatPercent(<%= @mood %>));
         };
     })
+
 });
+// $("<%= escape_javascript(render partial: 'repos/details') %>").appendTo.('div.mood-detail');

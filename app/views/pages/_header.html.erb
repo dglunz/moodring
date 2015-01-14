@@ -6,13 +6,14 @@
         <h1 class="brand-heading">Mood<br>Ring</h1>
         <div class="row">
           <%= form_for @repo, html: {id: 'repoForm'}, remote: true do |f| %>
+            <div id="circle"></div>
             <p>github.com/
             <%= f.text_field :owner, class: "github-repo", placeholder: "dglunz" %>/
             <%= f.text_field :name, class: "github-repo", placeholder: "moodring" %>
             </p>
-            <div id="circle"></div>
           <% end %>
         </div>
+        <div class="row mood-details"></div>
       </div>
     </div>
   </div>

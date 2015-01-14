@@ -72,7 +72,11 @@ a:focus {
 .github-repo {
   margin-top: 25px;
   border: 0;
-  width: 85px;
+  width: 63px;
+}
+
+#repo_name {
+  width: 100px;
 }
 
 textarea:focus, input:focus {
