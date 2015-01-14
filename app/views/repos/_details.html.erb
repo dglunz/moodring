@@ -1,1 +1,14 @@
-<p>TESTING TESTING TESTING</p>
+<div class="repo-detail">
+  <h1><%= @repo.owner %>'s project<br><%= @repo.name %></h1>
+  <p>Has an average mood of <%= @mood %> on a scale of zero to happy. This is an aggregate score based on sentiment analysis of the following commit messages</p>
+  <div>
+    <ul>
+      <% @repo.messages_with_sentiment.each do |message, sentiment| %>
+        <li>
+        <span class="commit"><%= message %></span>
+        <span class="commit-mood"><%= sentiment %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
