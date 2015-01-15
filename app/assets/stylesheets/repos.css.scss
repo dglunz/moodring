@@ -1,12 +1,20 @@
+ul {
+  list-style: none;
+}
+
 .repo-detail li {
-  list-style-type: none;
   text-decoration: none;
 }
 
 .commit {
-  float: left;
+  text-align: left;
 }
 
 .commit-mood {
-  float: right;
+  text-align: right;
+}
+
+.signup {
+  font-size: 48px;
+  color: #000;
 }

@@ -1,10 +1,14 @@
 $(function() {
-  $('#repoForm p').hide();
-  $('div.row.mood-details').replaceWith('<%=j render 'repos/details' %>');
+  console.log("FAILED");
   d3.selectAll('svg').remove();
-  moodRing();
+  $('#repoForm p').hide();
+  $('div.row.mood-details').html("<p>The repo you entered was invalid. <a href='#' id='refresh'>Try again.</a></p>");
+  $('#refresh').click(function() {
+    location.reload();
+  });
+  failed();
 
-  function moodRing() {
+  function failed() {
     var width = 480,
         height = 250,
         twoPi = 2 * Math.PI,
@@ -30,19 +34,17 @@ $(function() {
         .attr("text-anchor", "middle")
         .attr("dy", ".35em");
 
-    var o = d3.scale.linear([0,1])
-        .range(['red','green']);
-
     svg.append("path").transition().duration(1000).tween("created", function() {
       var i = d3.interpolate(0,100);
-      var c = d3.interpolateRgb('white', o(<%= @repo.mood %>));
+      var c = d3.interpolateRgb('white', 'red');
           return function(t) {
             created = i(t);
             color = c(t);
             background.attr("d", arc.endAngle(twoPi * created))
                       .attr("fill", color);
-            text.text(<%= @repo.mood %>);
+            text.text("Failed");
           };
       })
   }
+
 });

@@ -1,13 +1,35 @@
 class Repo < ActiveRecord::Base
-  def request
+  validates :owner, :name, presence: true
+  validates :private, exclusion: { in: [nil] }
+
+  def request_repo
+    Faraday.get "https://api.github.com/repos/#{owner}/#{name}" do |request|
+      request.params['client_id'] = ENV['GITHUB_KEY']
+      request.params['client_secret'] = ENV['GITHUB_SECRET']
+    end
+  end
+
+  def request_commits
     Faraday.get "https://api.github.com/repos/#{owner}/#{name}/commits" do |request|
       request.params['client_id'] = ENV['GITHUB_KEY']
       request.params['client_secret'] = ENV['GITHUB_SECRET']
     end
   end
 
+  def set_privacy
+    self.private = repo_info[:private]
+  end
+
+  def private?
+    private
+  end
+
+  def repo_info
+   @repo_info ||= JSON.parse request_repo.body, { symbolize_names: true }
+  end
+
   def commits
-    @commits ||= JSON.parse request.body, { symbolize_names: true }
+    @commits ||= JSON.parse request_commits.body, { symbolize_names: true }
   end
 
   def messages

@@ -1,14 +1,14 @@
 class ReposController < ApplicationController
   def create
     @repo = Repo.new(repo_params)
+    @repo.set_privacy
     respond_to do |format|
       if @repo.save
-        @mood = @repo.mood
         format.html { redirect :back }
         format.js   {}
-        format.json { render json: @mood, status: :created }
       else
-        redirect_to root_path
+        format.html { redirect :back }
+        format.js   { render "failed" }
       end
     end
   end
