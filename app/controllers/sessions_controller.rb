@@ -9,14 +9,14 @@ class SessionsController < ApplicationController
 
     if user
       session[:user_id] = user.id
-      redirect_to root_url, notice: "Signed in!"
+      redirect_to user_path user
     else
-      redirect_to root_url, notice: "Could not authenticate! Try again."
+      redirect_to root_url
     end
   end
 
   def destroy
     session.clear
-    redirect_to root_path, notice: "You've been logged out."
+    redirect_to root_path
   end
 end

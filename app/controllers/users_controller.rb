@@ -13,13 +13,13 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_url
     else
-      flash[:error] = "Could not sign up. Try again"
       render :back
     end
   end
 
   def show
     @user = User.find(params[:id])
+    @token = session[:token]
   end
 
   private

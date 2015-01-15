@@ -1,1 +1,17 @@
-<h1><%= @user.name %></h1>
+<div>
+  <h1><%= @user.name %></h1>
+  <h3>Public Repos</h3>
+  <div class="list-group">
+    <% @user.public_repos.each do |repo| %>
+      <a href="#" class="list-group-item"><%= repo %></a>
+    <% end %>
+  </div>
+  <% if @user.private_repos.any? %>
+    <h3>Private Repos</h3>
+    <div class="list-group">
+      <% @user.private_repos.each do |repo| %>
+        <a href="#" class="list-group-item"><%= repo %></a>
+      <% end %>
+    </div>
+  <% end %>
+</div>
