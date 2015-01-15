@@ -48,6 +48,12 @@ $(function() {
 
   startCircle("Submit");
 
+  $('#repoForm').keydown(function(e) {
+    if (e.keyCode==13) {
+      $('svg#submit-repo').trigger('click');
+    }
+  });
+
   $("svg#submit-repo").click(function() {
     $('form#repoForm').trigger('submit.rails');
     startCircle("Analyzing");
