@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   def request_user
     Faraday.get "https://api.github.com/user/repos" do |request|
       request.params['access_token'] = token
+      request.headers['Accept'] = 'application/vnd.github.moondragon+json'
     end
   end
 
