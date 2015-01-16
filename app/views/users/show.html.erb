@@ -3,7 +3,7 @@
   <h3>Public Repos</h3>
   <div class="list-group">
     <% @user.public_repos.each do |repo| %>
-      <a href="#" class="list-group-item"><%= repo %></a>
+      <%= link_to "#{repo}", new_repo_path(repo: repo), class: "list-group-item" %>
     <% end %>
   </div>
   <% if @user.private_repos.any? %>

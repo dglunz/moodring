@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#home'
 
+  get "/commit_sentiments", to: "repos#commit_sentiments"
   resources :users
   resources :repos
 

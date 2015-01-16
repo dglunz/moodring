@@ -1,8 +1,19 @@
 $(function() {
+  $('div.row.mood-details').replaceWith('<%=j render 'repos/details', stream: true %>');
   $('#repoForm p').hide();
-  $('div.row.mood-details').replaceWith('<%=j render 'repos/details' %>');
   d3.selectAll('svg').remove();
   moodRing();
+  analyze();
+
+  function analyze() {
+    var source = new EventSource('/commit_sentiments?id=<%= @repo.id %>');
+
+    source.onmessage = function (event){
+      if (event.data === '"stream_end"') { source.close(); return };
+      console.log(event.data);
+      $('#detail-table').find('tbody').prepend($("<tr>").append($("<td>").text(event.data)));
+    }
+  };
 
   function moodRing() {
     var width = 480,
@@ -35,13 +46,13 @@ $(function() {
 
     svg.append("path").transition().duration(1000).tween("created", function() {
       var i = d3.interpolate(0,100);
-      var c = d3.interpolateRgb('white', o(<%= @repo.mood %>));
+      var c = d3.interpolateRgb('white', o(4));
           return function(t) {
             created = i(t);
             color = c(t);
             background.attr("d", arc.endAngle(twoPi * created))
                       .attr("fill", color);
-            text.text(<%= @repo.mood %>);
+            text.text("Test");
           };
       })
   }
