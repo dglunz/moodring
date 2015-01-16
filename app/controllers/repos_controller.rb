@@ -12,7 +12,7 @@ class ReposController < ApplicationController
 
       @repo.messages.each do |msg|
         senti = @repo.analyze_sentiment(msg)
-        sse.write "#{senti}"
+        sse.write({ msg: msg, score: senti })
       end
 
       sse.write("stream_end")

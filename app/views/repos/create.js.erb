@@ -3,28 +3,37 @@ $(function() {
   $('#repoForm p').hide();
   d3.selectAll('svg').remove();
   moodRing();
-  analyze();
-
-  function analyze() {
-    var source = new EventSource('/commit_sentiments?id=<%= @repo.id %>');
-
-    source.onmessage = function (event){
-      if (event.data === '"stream_end"') { source.close(); return };
-      console.log(event.data);
-      $('#detail-table').find('tbody').prepend($("<tr>").append($("<td>").text(event.data)));
-    }
-  };
 
   function moodRing() {
+    analyze();
+
+    function analyze() {
+      var source = new EventSource('/commit_sentiments?id=<%= @repo.id %>');
+      var start = 0,
+          stop = 0.033,
+          total = 0;
+
+      source.onmessage = function (event){
+        if (event.data === '"stream_end"') { source.close(); fullCircle(total/30); return };
+        var e = JSON.parse(event.data);
+        score = +e["score"];
+        total += score;
+        circlePiece(start, stop, score);
+        start += 0.033;
+        stop += 0.033;
+        $('#detail-table').find('tbody')
+          .prepend($("<tr>")
+              .append($("<td class='text-left'>")
+                .text(e["msg"]))
+              .append($("<td>")
+                .text(score)));
+      }
+    }
+
     var width = 480,
         height = 250,
         twoPi = 2 * Math.PI,
         created = 0;
-
-    var arc = d3.svg.arc()
-        .startAngle(0)
-        .innerRadius(90)
-        .outerRadius(95);
 
     var svg = d3.select("#circle").append("svg")
         .attr("width", width)
@@ -35,7 +44,6 @@ $(function() {
     var meter = svg.append("g")
         .attr("class", "progress-meter");
 
-    var background = meter.append("path");
 
     var text = meter.append("text")
         .attr("text-anchor", "middle")
@@ -44,16 +52,44 @@ $(function() {
     var o = d3.scale.linear([0,1])
         .range(['red','green']);
 
-    svg.append("path").transition().duration(1000).tween("created", function() {
-      var i = d3.interpolate(0,100);
-      var c = d3.interpolateRgb('white', o(4));
-          return function(t) {
-            created = i(t);
-            color = c(t);
-            background.attr("d", arc.endAngle(twoPi * created))
-                      .attr("fill", color);
-            text.text("Test");
-          };
-      })
+    function circlePiece(start, end, score) {
+        var background = meter.append("path");
+        var arc = d3.svg.arc()
+          .startAngle(twoPi * start)
+          .innerRadius(85)
+          .outerRadius(95);
+
+        svg.append("path").transition().duration(1000).tween("created", function() {
+          var i = d3.interpolate(start,end);
+          var c = d3.interpolateRgb('white', o(score/100));
+              return function(t) {
+                created = i(t);
+                color = c(t);
+                background.attr("d", arc.endAngle(twoPi * created))
+                          .attr("fill", color);
+                text.text(score.toString());
+              };
+        })
+    }
+
+    function fullCircle(total) {
+        var background = meter.append("path");
+        var arc = d3.svg.arc()
+          .startAngle(0)
+          .innerRadius(85)
+          .outerRadius(95);
+
+        svg.append("path").transition().duration(1000).tween("created", function() {
+          var i = d3.interpolate(0,2);
+          var c = d3.interpolateRgb('white', o(total/100));
+              return function(t) {
+                created = i(t);
+                color = c(t);
+                background.attr("d", arc.endAngle(twoPi * created))
+                          .attr("fill", color);
+                text.text(total.toString());
+              };
+        })
+    }
   }
 });
