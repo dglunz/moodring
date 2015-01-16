@@ -3,20 +3,16 @@ class Repo < ActiveRecord::Base
   validates :private, exclusion: { in: [nil] }
 
   def request_repo
-    TimeTracker.track_time("repo.request_repo") do
-      Faraday.get "https://api.github.com/repos/#{owner}/#{name}" do |request|
-        request.params['client_id'] = ENV['GITHUB_KEY']
-        request.params['client_secret'] = ENV['GITHUB_SECRET']
-      end
+    Faraday.get "https://api.github.com/repos/#{owner}/#{name}" do |request|
+      request.params['client_id'] = ENV['GITHUB_KEY']
+      request.params['client_secret'] = ENV['GITHUB_SECRET']
     end
   end
 
   def request_commits
-    TimeTracker.track_time("repo.request_commits") do
-      Faraday.get "https://api.github.com/repos/#{owner}/#{name}/commits" do |request|
-        request.params['client_id'] = ENV['GITHUB_KEY']
-        request.params['client_secret'] = ENV['GITHUB_SECRET']
-      end
+    Faraday.get "https://api.github.com/repos/#{owner}/#{name}/commits" do |request|
+      request.params['client_id'] = ENV['GITHUB_KEY']
+      request.params['client_secret'] = ENV['GITHUB_SECRET']
     end
   end
 
@@ -29,7 +25,7 @@ class Repo < ActiveRecord::Base
   end
 
   def repo_info
-   @repo_info ||= JSON.parse request_repo.body, { symbolize_names: true }
+    @repo_info ||= JSON.parse request_repo.body, { symbolize_names: true }
   end
 
   def commits
@@ -41,11 +37,9 @@ class Repo < ActiveRecord::Base
   end
 
   def sentiments
-    @sentiments ||= begin
-                      TimeTracker.track_time("repo.sentiments") do
-                        messages.map { |commit| analyze_sentiment(commit) }
-                      end
-                    end
+    @sentiments ||= TimeTracker.track_time("repo.sentiments") do
+      messages.map { |commit| analyze_sentiment(commit) }
+    end
   end
 
   def analyze_sentiment(commit)
@@ -53,9 +47,7 @@ class Repo < ActiveRecord::Base
     # {:sha => "sha_value", :message => "message value"}
     # use rails cache (either memcached or Redis)
     # sentiment_value:<sha>
-    TimeTracker.track_time("repo.analyze_sentiment") do
-      (Sentimentalizer.analyze(commit).overall_probability * 100).round
-    end
+    (Sentimentalizer.analyze(commit).overall_probability * 100).round
   end
 
   def messages_with_sentiment
