@@ -52,7 +52,7 @@ class Repo < ActiveRecord::Base
     messages.zip sentiments
   end
 
-  def mood
+  def calculate_mood
     sentiments.inject(:+) / messages.count
   end
 
