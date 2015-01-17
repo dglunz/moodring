@@ -37,9 +37,7 @@ class Repo < ActiveRecord::Base
   end
 
   def sentiments
-    @sentiments ||= TimeTracker.track_time("repo.sentiments") do
-      messages.map { |commit| analyze_sentiment(commit) }
-    end
+    @sentiments ||= messages.map { |commit| analyze_sentiment(commit) }
   end
 
   def analyze_sentiment(commit)
@@ -56,5 +54,12 @@ class Repo < ActiveRecord::Base
 
   def mood
     sentiments.inject(:+) / messages.count
+  end
+
+  def badge
+    '<svg width="191px" height="191px" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="40" stroke="green" stroke-width="3" fill="white" />
+    <text x="50" y="55" font-size="20px" font-family="Helvetica Neue" font-weight="200" text-anchor="middle" >' + mood.to_s + '</text>
+    </svg>'
   end
 end

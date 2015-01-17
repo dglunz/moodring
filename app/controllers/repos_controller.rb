@@ -45,6 +45,14 @@ class ReposController < ApplicationController
     end
   end
 
+  def badge
+    @repo = Repo.find(params[:id])
+    svg = @repo.badge
+    respond_to do |format|
+      format.svg { render inline: svg }
+    end
+  end
+
   def index
 
   end
