@@ -57,7 +57,7 @@ class Repo < ActiveRecord::Base
   end
 
   def badge
-    '<svg width="191px" height="191px" xmlns="http://www.w3.org/2000/svg">
+    '<svg width="95px" height="95px" xmlns="http://www.w3.org/2000/svg">
     <circle cx="50" cy="50" r="40" stroke="green" stroke-width="3" fill="white" />
     <text x="50" y="55" font-size="20px" font-family="Helvetica Neue" font-weight="200" text-anchor="middle" >' + mood.to_s + '</text>
     </svg>'
