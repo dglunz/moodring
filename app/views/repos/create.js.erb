@@ -14,7 +14,7 @@ $(function() {
           total = 0;
 
       source.onmessage = function (event){
-        if (event.data === '"stream_end"') { source.close(); fullCircle(total/30); return };
+        if (event.data === '"stream_end"') { source.close(); fullCircle(Math.round(total/30)); return };
         var e = JSON.parse(event.data);
         score = +e["score"];
         total += score;
