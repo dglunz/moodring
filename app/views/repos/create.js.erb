@@ -49,8 +49,9 @@ $(function() {
         .attr("text-anchor", "middle")
         .attr("dy", ".35em");
 
-    var o = d3.scale.linear([0,1])
-        .range(['red','green']);
+    var o = d3.scale.ordinal()
+        .domain(d3.range(1))
+        .range(["#e34a33", "#fdbb84", "#fee8c8", "#e5f5f9", "#99d8c9", "#99d8c9"]);
 
     function circlePiece(start, end, score) {
         var background = meter.append("path");

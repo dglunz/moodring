@@ -56,10 +56,15 @@ class Repo < ActiveRecord::Base
     sentiments.inject(:+) / messages.count
   end
 
+  def mood_color
+    colors = ["#e34a33", "#fdbb84", "#fee8c8", "#e5f5f9", "#99d8c9", "#99d8c9"]
+    colors.at(((mood.to_f/100)*5).round)
+  end
+
   def badge
-    '<svg width="95px" height="95px" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="40" stroke="green" stroke-width="3" fill="white" />
-    <text x="50" y="55" font-size="20px" font-family="Helvetica Neue" font-weight="200" text-anchor="middle" >' + mood.to_s + '</text>
-    </svg>'
+    "<svg width='95px' height='95px' xmlns='http://www.w3.org/2000/svg'>
+    <circle cx='50' cy='50' r='40' stroke='#{mood_color}' stroke-width='3' fill='white' />
+    <text x='50' y='55' font-size='20px' font-family='Helvetica Neue' font-weight='200' text-anchor='middle' >#{ mood.to_s }</text>
+    </svg>"
   end
 end
