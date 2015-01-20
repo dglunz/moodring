@@ -20,7 +20,7 @@ class ReposController < ApplicationController
     ensure
       sse.close
     end
- end
+  end
 
   def create
     @repo = Repo.new(repo_params)
@@ -41,7 +41,6 @@ class ReposController < ApplicationController
     if @repo.save
       redirect_to repo_path @repo
     else
-      render :back
     end
   end
 
@@ -54,7 +53,10 @@ class ReposController < ApplicationController
   end
 
   def index
+  end
 
+  def show
+    @repo = Repo.find(params[:id])
   end
 
   private

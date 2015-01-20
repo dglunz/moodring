@@ -1,6 +1,4 @@
-$(function() {
-  $('div.row.mood-details').replaceWith('<%=j render 'repos/details' %>');
-  $('#repoForm p').hide();
+$(".repos.show").ready(function() {
   d3.selectAll('svg').remove();
   moodRing();
 
@@ -8,7 +6,7 @@ $(function() {
     analyze();
 
     function analyze() {
-      var source = new EventSource('/commit_sentiments?id=<%= @repo.id %>');
+      var source = new EventSource('/commit_sentiments?id=1');
       var start = 0,
           stop = 0.033,
           total = 0;
@@ -35,7 +33,7 @@ $(function() {
         twoPi = 2 * Math.PI,
         created = 0;
 
-    var svg = d3.select("#circle").append("svg")
+    var svg = d3.select("#show-circle").append("svg")
         .attr("width", width)
         .attr("height", height)
       .append("g")

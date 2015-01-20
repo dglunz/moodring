@@ -1,4 +1,4 @@
-$(function() {
+$(".pages.home").ready(function() {
   var width = 480,
       height = 250,
       twoPi = 2 * Math.PI,
