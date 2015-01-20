@@ -1,7 +1,7 @@
 .avatar {
   display: inherit;
   width: 48px;
-  heigh: 48px;
+  height: 48px;
 }
 
 .navbar-nav .open .dropdown-menu{
@@ -72,5 +72,9 @@
 .navbar-custom li a i {
   font-size: 2.5em;
   padding-right: 30px;
+}
+
+ul.nav.navbar-nav.navbar-right.text-right {
+  margin: 0;
 }
 
