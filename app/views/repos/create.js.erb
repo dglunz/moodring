@@ -51,7 +51,7 @@ $(function() {
 
     var o = d3.scale.ordinal()
         .domain(d3.range(100))
-        .range(["#e34a33", "#fdbb84", "#fee8c8", "#e5f5f9", "#99d8c9", "#99d8c9"]);
+        .range(["#e34a33", "#fdbb84", "#fee8c8", "#e5f5f9", "#99d8c9"]);
 
     function circlePiece(start, end, score) {
         var background = meter.append("path");
@@ -82,7 +82,7 @@ $(function() {
 
         svg.append("path").transition().duration(1000).tween("created", function() {
           var i = d3.interpolate(0,2);
-          var c = d3.interpolateRgb('white', o(total));
+          var c = d3.interpolateRgb('white', o(total/100));
               return function(t) {
                 created = i(t);
                 color = c(t);
