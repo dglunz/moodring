@@ -53,7 +53,7 @@ class Repo < ActiveRecord::Base
   end
 
   def calculate_mood
-    sentiments.inject(:+) / messages.count
+    sentiments.inject(:+) / messages.size
   end
 
   def mood_color
