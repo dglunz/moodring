@@ -41,10 +41,6 @@ class Repo < ActiveRecord::Base
   end
 
   def analyze_sentiment(commit)
-    # try to restructure commits so they hashes
-    # {:sha => "sha_value", :message => "message value"}
-    # use rails cache (either memcached or Redis)
-    # sentiment_value:<sha>
     (Sentimentalizer.analyze(commit).overall_probability * 100).round
   end
 
@@ -62,9 +58,9 @@ class Repo < ActiveRecord::Base
   end
 
   def badge
-    "<svg width='55px' height='55px' xmlns='http://www.w3.org/2000/svg'>
+    "<svg width='52px' height='52px' xmlns='http://www.w3.org/2000/svg'>
     <circle cx='30' cy='30' r='20' stroke='#{mood_color}' stroke-width='3' fill='white' />
-    <text x='30' y='35' font-size='18px' font-family='Helvetica Neue' font-weight='200' text-anchor='middle' >#{ mood.to_s }</text>
+    <text x='30' y='35' font-size='16px' font-family='Helvetica Neue' font-weight='100' text-anchor='middle' >#{ mood.to_s }</text>
     </svg>"
   end
 end

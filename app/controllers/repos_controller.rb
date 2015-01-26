@@ -7,14 +7,11 @@ class ReposController < ApplicationController
     @repo = Repo.find(params[:id])
     response.headers['Content-Type'] = 'text/event-stream'
     sse = Reloader::SSE.new(response.stream)
-
     begin
-
       @repo.messages.each do |msg|
         senti = @repo.analyze_sentiment(msg)
         sse.write({ msg: msg, score: senti })
       end
-
       sse.write("stream_end")
     rescue IOError
     ensure
@@ -57,6 +54,13 @@ class ReposController < ApplicationController
 
   def show
     @repo = Repo.find(params[:id])
+  end
+  
+  def update
+    repo = Repo.find(params[:id])
+    mood = params[:mood].to_i / 30
+    repo.update_attributes(mood: mood)
+    render nothing: true
   end
 
   private

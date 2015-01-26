@@ -14,7 +14,12 @@ $(".repos.show").ready(function() {
       var source = new EventSource('/commit_sentiments?id='+ repo.id);
 
       source.onmessage = function (event){
-        if (event.data === '"stream_end"') { source.close(); fullCircle(Math.round(total/30)); return };
+        if (event.data === '"stream_end"') { 
+          source.close(); 
+          fullCircle(Math.round(total/30)); 
+          updateMood(repo, total);
+          return
+        };
         var e = JSON.parse(event.data);
         score = +e["score"];
         total += score;
@@ -91,6 +96,14 @@ $(".repos.show").ready(function() {
                 text.text(total.toString());
               };
         })
+    }
+
+    function updateMood(repo, total) {
+      $.ajax({
+        type: "PATCH",
+        url: "/repos/"+ repo.id,
+        data: { "mood": total }
+      });
     }
   }
 });
