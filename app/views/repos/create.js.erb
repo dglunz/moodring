@@ -62,7 +62,7 @@ $(function() {
 
         svg.append("path").transition().duration(1000).tween("created", function() {
           var i = d3.interpolate(start,end);
-          var c = d3.interpolateRgb('white', o(score/100));
+          var c = d3.interpolateRgb('white', o(score));
               return function(t) {
                 created = i(t);
                 color = c(t);
@@ -82,7 +82,7 @@ $(function() {
 
         svg.append("path").transition().duration(1000).tween("created", function() {
           var i = d3.interpolate(0,2);
-          var c = d3.interpolateRgb('white', o(total/100));
+          var c = d3.interpolateRgb('white', o(total));
               return function(t) {
                 created = i(t);
                 color = c(t);

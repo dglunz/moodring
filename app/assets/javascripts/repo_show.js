@@ -6,10 +6,12 @@ $(".repos.show").ready(function() {
     analyze();
 
     function analyze() {
-      var source = new EventSource('/commit_sentiments?id=1');
       var start = 0,
-          stop = 0.033,
-          total = 0;
+          stop  = 0.033,
+          total = 0,
+          repo  = $('.temp_information').data('temp');
+
+      var source = new EventSource('/commit_sentiments?id='+ repo.id);
 
       source.onmessage = function (event){
         if (event.data === '"stream_end"') { source.close(); fullCircle(Math.round(total/30)); return };
@@ -60,7 +62,7 @@ $(".repos.show").ready(function() {
 
         svg.append("path").transition().duration(1000).tween("created", function() {
           var i = d3.interpolate(start,end);
-          var c = d3.interpolateRgb('white', o(score/100));
+          var c = d3.interpolateRgb('white', o(score));
               return function(t) {
                 created = i(t);
                 color = c(t);
@@ -80,7 +82,7 @@ $(".repos.show").ready(function() {
 
         svg.append("path").transition().duration(1000).tween("created", function() {
           var i = d3.interpolate(0,2);
-          var c = d3.interpolateRgb('white', o(total/100));
+          var c = d3.interpolateRgb('white', o(total));
               return function(t) {
                 created = i(t);
                 color = c(t);
