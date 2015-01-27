@@ -26,12 +26,6 @@ $(".repos.show").ready(function() {
         circlePiece(start, stop, score);
         start += 0.033;
         stop += 0.033;
-        $('#detail-table').find('tbody')
-          .prepend($("<tr>")
-              .append($("<td class='text-left'>")
-                .text(e["msg"]))
-              .append($("<td>")
-                .text(score)));
       }
     }
 

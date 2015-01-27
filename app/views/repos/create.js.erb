@@ -18,6 +18,21 @@ $(function() {
           source.close(); 
           fullCircle(Math.round(total/30)); 
           updateMood(total);
+          $('#detail-table').bootstrapTable({
+            search: false,
+            columns: [{
+              field: 'message',
+              title: 'Commit Message',
+              align: 'left',
+              sortable: true
+            }, {
+              field: 'sentiment',
+              title: 'Sentiment',
+              align: 'right',
+              sortable: true
+            }]
+          });
+          $('.fixed-table-loading').hide();
           return 
         };
 

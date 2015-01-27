@@ -1,8 +1,15 @@
 <div class="repo-detail">
   <h1><%= @repo.owner %>'s project<br><%= @repo.name %></h1>
-    <table class="table table-hover table-condensed" id="detail-table">
-      <tbody></tbody>
-    </table>
+  <table data-sort-name="name" data-sort-order="desc" class="table table-hover table-condensed" id="detail-table">
+    <tbody>
+      <thead>
+        <tr>
+          <th data-field="message" data-align="center" data-sortable="true">Commit Message</th>
+          <th data-field="sentiment" data-sortable="true">Sentiment</th>
+        </tr>
+      </thead>
+    </tbody>
+  </table>
     <% if !current_user %>
       <p>For fancy graphs and full analysis, sign up with github</p>
       <a href="/auth/github"><i class="fa fa-github signup"></i></a>
