@@ -29,6 +29,15 @@ group :development, :test do
   gem 'quiet_assets'
 end
 
-gem 'rails_12factor', group: :production
+group :test do
+  gem 'capybara-webkit'
+  gem 'capybara-screenshot'
+  gem 'minitest-vcr'
+  gem 'vcr'
+  gem 'webmock'
+  gem 'minitest-rails-capybara'
+  gem 'simplecov', require: false
+end
 
+gem 'rails_12factor', group: :production
 gem 'sdoc', '~> 0.4.0', group: :doc

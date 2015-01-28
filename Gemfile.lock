@@ -42,6 +42,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (6.0.0)
     better_errors (2.1.0)
       coderay (>= 1.0.0)
@@ -54,6 +55,19 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    capybara (2.4.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    capybara-screenshot (1.0.4)
+      capybara (>= 1.0, < 3)
+      colored
+      launchy
+    capybara-webkit (1.4.1)
+      capybara (>= 2.3.0, < 2.5.0)
+      json
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -62,11 +76,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    colored (1.2)
     columnize (0.9.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     d3-rails (3.5.2)
       railties (>= 3.1)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
+    docile (1.1.5)
     erubis (2.7.0)
     execjs (2.2.2)
     faraday (0.9.1)
@@ -94,6 +112,8 @@ GEM
       turbolinks
     json (1.8.1)
     jwt (1.2.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -101,7 +121,27 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
+    minispec-metadata (2.0.0)
+      minitest
     minitest (5.5.0)
+    minitest-capybara (0.7.1)
+      capybara (~> 2.2)
+      minitest (~> 5.0)
+      rake
+    minitest-metadata (0.5.3)
+      minitest (>= 4.7, < 6.0)
+    minitest-rails (2.1.1)
+      minitest (~> 5.4)
+      railties (~> 4.1)
+    minitest-rails-capybara (2.1.1)
+      capybara (~> 2.0)
+      minitest-capybara (~> 0.7.0)
+      minitest-metadata (~> 0.5.0)
+      minitest-rails (~> 2.1)
+    minitest-vcr (1.2.2)
+      minispec-metadata (~> 2.0)
+      minitest (>= 4.7.5)
+      vcr (~> 2.9)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -173,6 +213,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    safe_yaml (1.0.4)
     sass (3.4.9)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -183,6 +224,11 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    simplecov (0.9.1)
+      docile (~> 1.1.0)
+      multi_json (~> 1.0)
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     slop (3.6.0)
     spring (1.2.0)
     sprockets (2.12.3)
@@ -204,11 +250,17 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    vcr (2.9.3)
     web-console (2.0.0)
       activemodel (~> 4.0)
       binding_of_caller (>= 0.7.2)
       railties (~> 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    webmock (1.20.4)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -216,6 +268,8 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
+  capybara-screenshot
+  capybara-webkit
   coffee-rails (~> 4.1.0)
   d3-rails
   faraday
@@ -225,6 +279,8 @@ DEPENDENCIES
   jquery-easing-rails
   jquery-rails
   jquery-turbolinks
+  minitest-rails-capybara
+  minitest-vcr
   omniauth-github
   pg
   pry-byebug
@@ -236,7 +292,10 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   sentimentalizer!
+  simplecov
   spring
   turbolinks
   uglifier (>= 1.3.0)
+  vcr
   web-console (~> 2.0)
+  webmock

@@ -10,7 +10,7 @@ class ReposController < ApplicationController
     begin
       @repo.messages.each do |msg|
         senti = @repo.analyze_sentiment(msg)
-        sse.write({ msg: msg, score: senti })
+        sse.write({ msg: msg, score: senti})
       end
       sse.write("stream_end")
     rescue IOError
@@ -35,10 +35,7 @@ class ReposController < ApplicationController
     owner, name = params[:repo].split("/")
     @repo = Repo.new(owner: owner, name: name)
     @repo.set_privacy
-    if @repo.save
-      redirect_to repo_path @repo
-    else
-    end
+    redirect_to repo_path @repo if @repo.save
   end
 
   def badge

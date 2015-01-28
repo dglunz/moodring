@@ -36,20 +36,8 @@ class Repo < ActiveRecord::Base
     commits.map{ |commit| commit[:commit][:message] }
   end
 
-  def sentiments
-    @sentiments ||= messages.map { |commit| analyze_sentiment(commit) }
-  end
-
   def analyze_sentiment(commit)
     (Sentimentalizer.analyze(commit).overall_probability * 100).round
-  end
-
-  def messages_with_sentiment
-    messages.zip sentiments
-  end
-
-  def calculate_mood
-    sentiments.inject(:+) / messages.size
   end
 
   def mood_color
