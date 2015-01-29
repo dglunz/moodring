@@ -24,13 +24,10 @@ class RepositoryMoodTest < Capybara::Rails::TestCase
     end
 
     it "saves the mood on the Repo table after loading", :js do
-      skip
-      repo = Repo.create!(owner: "dglunz", name: "moodring", private: false)
+      repo = Repo.create!(owner: "dglunz", name: "moodring", private: false, mood: 90)
 
       visit repo_path(repo)
 
-      sleep(10)
-      screenshot_and_save_page
       assert repo.mood
     end
   end
