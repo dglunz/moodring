@@ -1,7 +1,10 @@
 <div class="container">
   <div class="col-md-8 col-md-offset-2 text-center">
-      <h1><%= @repo.name %></h1>
-      <div id="show-circle"></div>
+    <h1><%= @repo.name %></h1>
+    <div id="show-circle"></div>
+  </div>
+  <div class="col-md-10 col-md-offset-1 text-center">
+    <div id="show-graph"></div>
   </div>
 </div>
 <%= content_tag :div, class: "temp_information", data: {temp: @repo} do; end %>

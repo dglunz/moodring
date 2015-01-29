@@ -40,7 +40,7 @@ $(".repos.show").ready(function() {
                     .y0(height2)
                         .y1(function(d) { return y2(d.price); });
 
-      var svg = d3.select("body").append("svg")
+      var svg = d3.select("#show-graph").append("svg")
             .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
 

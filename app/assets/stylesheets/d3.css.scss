@@ -17,7 +17,7 @@ svg {
 }
 
 .area {
-  fill: steelblue;
+  fill: rgb(153, 216, 201);
   clip-path: url(#clip);
   }
 
@@ -32,4 +32,8 @@ svg {
   stroke: #fff;
   fill-opacity: .125;
   shape-rendering: crispEdges;
+}
+
+.footer {
+  height: 30px;
 }
