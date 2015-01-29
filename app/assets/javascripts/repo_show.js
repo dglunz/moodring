@@ -105,7 +105,7 @@ $(".repos.show").ready(function() {
 
       function type(d) {
         d.date = parseDate(d.date);
-        d.price = +d.price;
+        d.price = Math.floor(Math.random() * (100 - 40)) + 40;
         return d;
       }
     }
