@@ -11,12 +11,13 @@ $(function() {
       var source = new EventSource('/commit_sentiments?id=<%= @repo.id %>');
       var start = 0,
           stop = 0.033,
-          total = 0;
+          total = 0,
+          commits = 0;
 
       source.onmessage = function (event){
         if (event.data === '"stream_end"') { 
           source.close(); 
-          fullCircle(Math.round(total/30)); 
+          fullCircle(Math.round(total/commits)); 
           updateMood(total);
           $('#detail-table').bootstrapTable({
             search: false,
@@ -42,6 +43,7 @@ $(function() {
         circlePiece(start, stop, score);
         start += 0.033;
         stop += 0.033;
+        commits += 1;
         $('#detail-table').find('tbody')
           .prepend($("<tr>")
               .append($("<td class='text-left'>")

@@ -114,18 +114,21 @@ $(".repos.show").ready(function() {
       var start = 0,
           stop  = 0.033,
           total = 0,
-          repo  = $('.temp_information').data('temp');
+          repo  = $('.temp_information').data('temp'),
+          commits = 0;
 
       var source = new EventSource('/commit_sentiments?id='+ repo.id);
 
       source.onmessage = function (event){
         if (event.data === '"stream_end"') { 
           source.close(); 
-          fullCircle(Math.round(total/30)); 
+          console.log(commits);
+          fullCircle(Math.round(total/commits)); 
           updateMood(repo, total);
           return
         };
         var e = JSON.parse(event.data);
+        commits += 1;
         score = +e["score"];
         total += score;
         circlePiece(start, stop, score);

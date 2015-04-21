@@ -1,5 +1,5 @@
 <div class="repo-detail">
-  <h1><%= @repo.owner %>'s project<br><%= @repo.name %></h1>
+  <h1><%= @repo.owner %>'s <span class="light">project</span><br><%= @repo.name %></h1>
   <table data-sort-name="name" data-sort-order="desc" class="table table-hover table-condensed" id="detail-table">
     <tbody>
       <thead>
@@ -11,7 +11,7 @@
     </tbody>
   </table>
     <% if !current_user %>
-      <p>For fancy graphs and full analysis, sign up with github</p>
+      <p>For fancy graphs and full analysis, sign up with github.</p>
       <a href="/auth/github"><i class="fa fa-github signup"></i></a>
     <% end %>
 </div>

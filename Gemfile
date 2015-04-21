@@ -18,6 +18,7 @@ gem 'omniauth-github'
 gem 'faraday'
 gem 'figaro'
 gem 'sentimentalizer', github: 'malavbhavsar/sentimentalizer'
+gem 'skylight'
 
 group :development, :test do
   gem 'pry-byebug'
