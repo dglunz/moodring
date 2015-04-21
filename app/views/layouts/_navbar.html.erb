@@ -1,4 +1,9 @@
 <nav class="navbar navbar-custom" role="navigation">
+<% if !current_page? root_url %>
+<ul class="nav navbar-nav navbar-left">
+<li><%= link_to "Mood Ring", root_path %></li>
+</ul>
+<% end %>
 <ul class="nav navbar-nav navbar-right text-right">
   <% if current_user %>
     <div class="dropdown">
